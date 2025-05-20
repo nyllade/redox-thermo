@@ -1,4 +1,5 @@
-numpy
 pandas
+numpy
 matplotlib
 seaborn
+jinja2
