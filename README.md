@@ -24,29 +24,29 @@ redox-thermo/
 │   ├── plotting.py            # High-quality visualizations of main results
 │   ├── generate_main_table.py # Table of ΔG, E, exergy per reaction & environment
 │   ├── generate_redox_reference_table.py  # Reaction references with E⁰ and ΔH
-│   └── figures_main/          # PNG versions of main figures (preview)
-         data.py
-         thermodynamics.py
-         results.csv
+│   ├── figures_main/          # PNG versions of main figures (preview)
+│   ├── data.py
+│   ├── thermodynamics.py
+│   └── results.csv
 │
 ├── optimization/               # Optimal conditions per redox pair
 │   ├── optimize.py            # Finds max-exergy pH/T for each pair
 │   ├── plot_optimal.py        # Three bar/scatter figures (ΔG, Exergy, Conditions)
 │   ├── generate_optimal_table.py # LaTeX table for best conditions
-│   └── figures_optimization/  # PNG figures
-        optimal conditions.csv
+│   ├── figures_optimization/  # PNG figures
+│   └── optimal conditions.csv
 │
 ├── sensitivity/                # Sensitivity to pH, temperature, and [CO2]
 │   ├── sensitivity.py         # Runs sweeps and generates summary
 │   ├── plot_sensitivity.py    # 3 summary plots (scatter, bar, concentration)
-│   └── figures_summary/       # PNG previews of summary results
-        data_sensitivity/
-        figures_sensitivity/
-        sensitivity_summary.csv
-        sensitivity_summary.py
+│   ├── figures_summary/       # PNG previews of summary results
+│   ├── data_sensitivity/
+│   ├── figures_sensitivity/
+│   ├── sensitivity_summary.csv
+│   └── sensitivity_summary.py
 │
 ├── report/
-│   ├── figures/                          # Publication-quality PDFs from main, sensitivity, optimization
+│   ├── figures/                          # Publication-quality PDFs from main, sensitivity optimization
 │   ├── figures/figures_sensitivity/      # Publication-quality PDFs from sensitivity
 │   └── tables/                           # LaTeX-formatted result tables
 │
