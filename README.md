@@ -19,39 +19,41 @@ This study explores how specific redox reactions may have behaved across plausib
 
 ```
 redox-thermo/
-├── main/                        # Baseline simulations across 3 early Earth environments
-│   ├── main.py                 # Runs all simulations and generates outputs
-│   ├── plotting.py            # High-quality visualizations of main results
-│   ├── generate_main_table.py # Table of ΔG, E, exergy per reaction & environment
-│   ├── generate_redox_reference_table.py  # Reaction references with E⁰ and ΔH
-│   ├── figures_main/          # PNG versions of main figures (preview)
-│   ├── data.py
-│   ├── thermodynamics.py
-│   └── results.csv
+├── main/                                 # Baseline thermodynamic simulations across 3 early Earth environments
+│   ├── main.py                           # Runs all simulations and generates outputs
+│   ├── plotting.py                       # High-quality visualizations (ΔG, Exergy, Redox Ladder)
+│   ├── generate_main_table.py            # Exports LaTeX table of ΔG, E, exergy per reaction & environment
+│   ├── generate_redox_reference_table.py # Generates LaTeX table with reference E⁰ and ΔH values
+│   ├── data.py                           # Defines redox pairs and environmental settings
+│   ├── thermodynamics.py                 # Core thermodynamic calculations (Q, ΔG, efficiency)
+│   ├── results.csv                       # Main simulation output data (ΔG, Exergy, etc.)
+│   └── figures_main/                     # PNG previews of main result figures
 │
-├── optimization/               # Optimal conditions per redox pair
-│   ├── optimize.py            # Finds max-exergy pH/T for each pair
-│   ├── plot_optimal.py        # Three bar/scatter figures (ΔG, Exergy, Conditions)
-│   ├── generate_optimal_table.py # LaTeX table for best conditions
-│   ├── figures_optimization/  # PNG figures
-│   └── optimal conditions.csv
+├── optimization/                         # Optimal conditions (pH, T) per redox pair
+│   ├── optimize.py                       # Finds conditions for max exergy efficiency
+│   ├── plot_optimal.py                   # Plots: ΔG, exergy, and pH/T scatter under optimal conditions
+│   ├── generate_optimal_table.py         # LaTeX summary table for optimal results
+│   ├── optimal_conditions.csv            # Output data: best conditions per redox pair
+│   └── figures_optimization/             # PNG previews of optimization result figures
 │
-├── sensitivity/                # Sensitivity to pH, temperature, and [CO2]
-│   ├── sensitivity.py         # Runs sweeps and generates summary
-│   ├── plot_sensitivity.py    # 3 summary plots (scatter, bar, concentration)
-│   ├── figures_summary/       # PNG previews of summary results
-│   ├── data_sensitivity/
-│   ├── figures_sensitivity/
-│   ├── sensitivity_summary.csv
-│   └── sensitivity_summary.py
+├── sensitivity/                          # Sensitivity analysis (ΔG, exergy) to pH, temperature, concentration
+│   ├── sensitivity.py                    # Runs sensitivity sweeps (pH, T, [CO₂]) and creates datasets
+│   ├── plot_sensitivity.py               # Generates final summary plots (scatter, bar, concentration)
+│   ├── sensitivity_summary.py            # Builds summary CSV and LaTeX table from 48 sweep datasets
+│   ├── sensitivity_summary.csv           # Final summary table of sensitivity ranges
+│   ├── data_sensitivity/                 # Raw sweep data (CSV files, per redox pair × axis)
+│   ├── figures_sensitivity/              # Detailed sweep figures (PDF or PNG, 48 total)
+│   └── figures_summary/                  # Final summary plots (PNG previews)
 │
 ├── report/
-│   ├── figures/                          # Publication-quality PDFs from main, sensitivity optimization
-│   ├── figures/figures_sensitivity/      # Publication-quality PDFs from sensitivity
-│   └── tables/                           # LaTeX-formatted result tables
+│   ├── figures/                          # Publication-quality PDF figures from all modules
+│   │   ├── figures_main/
+│   │   ├── figures_optimization/
+│   │   └── figures_sensitivity/
+│   └── tables/                           # All LaTeX-formatted tables (for Overleaf or journal submission)
 │
-├── requirements.txt            # Python dependencies
-└── README.md                   # This file
+├── requirements.txt                      # Python dependencies (minimal list)
+└── README.md                             # This file
 ```
 
 ---
@@ -95,27 +97,31 @@ python sensitivity/sensitivity.py
 
 ## 🧾 Output Summary
 
-This project generates publication-ready outputs across all modules. The outputs include structured data files, scientific figures in both preview and high-resolution formats, and LaTeX tables ready for Overleaf or paper submission.
+This project generates a complete set of **publication-ready outputs** across all modules.  
+It includes structured data files (CSV), scientific figures in both preview (PNG) and high-resolution (PDF) formats, and LaTeX tables ready for Overleaf or manuscript submission.
 
-| Type                    | File(s) / Folder                                          | Description                                                                 |
-|-------------------------|-----------------------------------------------------------|-----------------------------------------------------------------------------|
-| **CSV Results**         | `main/results.csv`                                        | Thermodynamic results for 12 redox pairs across 3 environments              |
-|                         | `optimization/optimal_conditions.csv`                    | Optimal pH and temperature with corresponding ΔG and exergy values         |
-|                         | `sensitivity/sensitivity_summary.csv`                    | Summary of ΔG and exergy sensitivity to T and pH                            |
-|                         | `sensitivity/data_sensitivity/*.csv`                     | Raw ΔG & exergy sweep data for 12 pairs × 2 axes (48 files total)          |
-|                         | `sensitivity/concentration_sensitivity.csv`              | Output from concentration analysis                                         |
-| **LaTeX Tables**        | `report/tables/table_main_results.tex`                   | ΔG, E, exergy efficiency per environment and redox pair                    |
-|                         | `report/tables/table_redox_reference.tex`                | Redox reactions with E⁰, n, and ΔH                                         |
-|                         | `report/tables/table_optimal_conditions.tex`             | Best environmental conditions for each redox pair                         |
-|                         | `report/tables/table_sensitivity_summary.tex`            | Categorized sensitivity levels (Stable, Moderate, Sensitive)              |
-|                         | `report/tables/table_dG_env.tex`, `table_exergy_env.tex` | Environment-sorted ΔG and exergy tables                                   |
-| **PNG Figures (Preview)**| `main/figures_main/`, `optimization/figures_optimization/`, `sensitivity/figures_summary/` | Quick-look charts for visual inspection                                  |
-| **Sweep Figures (48)** | `sensitivity/figures_sensitivity/`                        | All T/pH sweep plots (ΔG vs T, ΔG vs pH, Exergy vs T, Exergy vs pH × 12)  |
-| **PDF Figures (Final)** | `report/figures/figures_main/`                           | ΔG by environment, Exergy by environment, Redox ladder                     |
-|                         | `report/figures/figures_optimization/`                   | Bar & scatter plots from optimization results                             |
-|                         | `report/figures/figures_sensitivity/`                    | Stability & fragility plots + concentration sensitivity                   |
+| **Type**                  | **File(s) / Folder**                                                                 | **Description**                                                                |
+|---------------------------|-------------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| **CSV Results**           | `main/results.csv`                                                                  | Thermodynamic results for 12 redox pairs across 3 environments                |
+|                           | `optimization/optimal_conditions.csv`                                               | Optimal pH and temperature with corresponding ΔG and exergy values            |
+|                           | `sensitivity/sensitivity_summary.csv`                                               | Summary of ΔG and exergy sensitivity to temperature and pH                   |
+|                           | `sensitivity/data_sensitivity/*.csv`                                                | Raw sweep data for 12 redox pairs × 2 axes (48 files total)                  |
+|                           | `sensitivity/concentration_sensitivity.csv`                                         | Output from concentration sensitivity analysis                               |
+| **LaTeX Tables**          | `report/tables/table_main_results.tex`                                              | ΔG, E, exergy efficiency per environment and redox pair                      |
+|                           | `report/tables/table_redox_reference.tex`                                           | Redox reactions with E⁰, electron count (n), and ΔH                         |
+|                           | `report/tables/table_optimal_conditions.tex`                                        | Best environmental conditions (pH, T) for each redox pair                   |
+|                           | `report/tables/table_sensitivity_summary.tex`                                       | Categorized sensitivity levels (Stable, Moderate, Sensitive)                |
+|                           | `report/tables/table_dG_env.tex`, `table_exergy_env.tex`                            | Environment-sorted ΔG and exergy tables                                     |
+| **PNG Figures (Preview)** | `main/figures_main/`, `optimization/figures_optimization/`, `sensitivity/figures_summary/` | Quick-look preview figures for visual inspection                            |
+| **Sweep Figures (48)**    | `sensitivity/figures_sensitivity/`                                                  | All T/pH sweep plots (ΔG vs T, ΔG vs pH, Exergy vs T, Exergy vs pH × 12)    |
+| **PDF Figures (Final)**   | `report/figures/figures_main/`                                                      | High-resolution ΔG by environment, Exergy by environment, Redox ladder       |
+|                           | `report/figures/figures_optimization/`                                              | Bar and scatter plots from optimization results                             |
+|                           | `report/figures/figures_sensitivity/`                                               | Final stability, fragility, and concentration sensitivity plots              |
 
-All outputs are reproducible and exported automatically upon script execution. Figures are styled for use in scientific posters, reports, or articles.
+---
+
+✅ All outputs are **automatically generated** upon script execution.  
+✅ Figures are styled for use in scientific posters, conference presentations, and journal publications.
 
 ---
 
