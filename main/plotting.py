@@ -71,7 +71,7 @@ def plot_redox_ladder():
         n = pair.get("n")
         if None in (E0, dH, n):
             continue
-        dG0 = -n * 96485 * E0 / 1000
+        dG0 = -n * 96485 * E0 / 1000  # kJ/mol
         ex_eff = 100 * dG0 / dH if dH != 0 else 0
         ladder.append({
             "Redox Pair": name,
@@ -87,12 +87,12 @@ def plot_redox_ladder():
         x="E0",
         y="Redox Pair",
         hue="Redox Pair",
-        palette="coolwarm",
-        legend=False
+        palette="coolwarm"
     )
     plt.xlabel("Standard Redox Potential E$^0$ (V)")
     plt.title("Redox Ladder Colored by Exergy Efficiency")
-    plt.grid(True, linestyle="--", alpha=0.5)
+    plt.legend([], [], frameon=False)  # Remove legend
+
     plt.tight_layout()
     plt.savefig(os.path.join(figures_pdf, "redox_ladder.pdf"))
     plt.savefig(os.path.join(figures_png, "redox_ladder.png"), dpi=300)

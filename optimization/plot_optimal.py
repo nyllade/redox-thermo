@@ -2,6 +2,8 @@
 # based on the results from the optimization process.
 # It includes bar plots of exergy efficiency and ΔG, and a scatter plot of optimal conditions.
 # The figures are saved to both optimization/figures_optimization and report/figures/figures_optimization.
+# plot_optimal.py
+# Generates bar and scatter plots for optimal redox conditions
 
 import os
 import pandas as pd
@@ -9,11 +11,11 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 
-# Define paths
+# Paths
 base_dir = os.path.dirname(__file__)
 csv_path = os.path.join(base_dir, "optimal_conditions.csv")
 fig_dir_png = os.path.join(base_dir, "figures_optimization")
-fig_dir_pdf = os.path.abspath(os.path.join(base_dir, "../report/figures"))
+fig_dir_pdf = os.path.abspath(os.path.join(base_dir, "../report/figures/figures_optimization"))
 os.makedirs(fig_dir_png, exist_ok=True)
 os.makedirs(fig_dir_pdf, exist_ok=True)
 
@@ -25,12 +27,12 @@ def plot_optimal_exergy_efficiency():
         x="Redox Pair",
         y="Exergy Efficiency (%)",
         hue="Redox Pair",
-        palette="viridis",
-        legend=False
+        palette="viridis"
     )
     plt.title("Optimal Exergy Efficiency by Redox Pair")
     plt.ylabel("Efficiency (%)")
     plt.xticks(rotation=45, ha='right')
+    plt.legend().remove()  # Manually remove legend
     plt.grid(True, linestyle="--", alpha=0.5)
     plt.tight_layout()
     plt.savefig(os.path.join(fig_dir_pdf, "optimal_exergy_efficiency.pdf"))
@@ -40,7 +42,6 @@ def plot_optimal_exergy_efficiency():
 def plot_optimal_conditions_scatter():
     df = pd.read_csv(csv_path)
     plt.figure(figsize=(8, 6))
-
     jittered_pH = df["pH"] + np.random.uniform(-0.25, 0.25, size=len(df))
     jittered_T = df["T (K)"] + np.random.uniform(-1.5, 1.5, size=len(df))
     colors = sns.color_palette("tab20", n_colors=len(df))
@@ -74,12 +75,12 @@ def plot_optimal_dG():
         x="Redox Pair",
         y="ΔG (kJ/mol)",
         hue="Redox Pair",
-        palette="magma",
-        legend=False
+        palette="magma"
     )
     plt.title("ΔG at Optimal Conditions by Redox Pair")
     plt.ylabel("ΔG (kJ/mol)")
     plt.xticks(rotation=45, ha='right')
+    plt.legend().remove()  # Remove legend manually
     plt.grid(True, linestyle="--", alpha=0.5)
     plt.tight_layout()
     plt.savefig(os.path.join(fig_dir_pdf, "optimal_dG.pdf"))
@@ -90,11 +91,7 @@ def generate_optimal_plots():
     plot_optimal_exergy_efficiency()
     plot_optimal_conditions_scatter()
     plot_optimal_dG()
-    print("Optimization plots saved to figures_optimization/ and report/figures/figures_optimization.")
+    print("✅ Optimization plots saved to both figures_optimization/ and report/figures/figures_optimization/.")
 
 if __name__ == "__main__":
     generate_optimal_plots()
-
-
-
-

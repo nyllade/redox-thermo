@@ -126,10 +126,12 @@ def plot_directional_fragility():
 
 def plot_concentration_sensitivity():
     sweep_species = {
+        "H2/H+": "H+",
         "CO2/CH4": "CO2",
-        "CO2/CO": "CO2",
         "NO3-/NO2-": "NO3-",
-        "Fe3+/Fe2+": "Fe3+"
+        "NO2^-/N2": "NO2-",
+        "SO4^2-/H2S": "SO4^2-",
+        "Acetate/CO2": "CH3COO-",
     }
     T = 300
     pH = 7

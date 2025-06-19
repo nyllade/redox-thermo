@@ -1,37 +1,19 @@
 Redox Pair,Reaction,Environment,E (V),ΔG (kJ/mol),Exergy Eff (ΔG%),Exergy Eff (ΔH%)
 H2/H+,2H+ + 2e- → H2,alkaline_vent,-0.8225,158.72,198.68,-55.5
 CO2/CH4,CO2 + 8H+ + 8e- → CH4 + 2H2O,alkaline_vent,-0.8313,641.64,340.68,-72.01
-Fe3+/Fe2+,Fe3+ + e- → Fe2+,alkaline_vent,0.7019,-67.72,91.16,338.62
 NO3-/NO2-,NO3⁻ + 2H⁺ + 2e⁻ → NO2⁻ + H2O,alkaline_vent,-0.1237,23.87,-29.38,-20.4
-S0/H2S,S⁰ + 2H⁺ + 2e⁻ → H2S,alkaline_vent,-0.4388,84.67,-313.4,-256.57
-CO2/CO,CO2 + 2H⁺ + 2e⁻ → CO + H2O,alkaline_vent,-0.6167,119.0,581.76,-59.8
 SO4^2-/H2S,SO₄²⁻ + 8H⁺ + 8e⁻ → H₂S + 4H₂O,alkaline_vent,-0.8043,620.8,370.63,-77.89
 NO2^-/N2,2NO₂⁻ + 6H⁺ + 6e⁻ → N₂ + 2H₂O,alkaline_vent,-0.2955,171.06,-86.91,-16.77
-MnO2/Mn2+,MnO₂ + 4H⁺ + 2e⁻ → Mn²⁺ + 2H₂O,alkaline_vent,-0.0296,5.72,-2.41,-1.1
 Acetate/CO2,CH₃COO⁻ + 2H₂O → 2CO₂ + 7H⁺ + 8e⁻,alkaline_vent,-0.273,210.71,94.13,-24.22
-Formate/CO2,HCOO⁻ → CO₂ + H⁺ + 2e⁻,alkaline_vent,-0.464,89.55,107.92,-35.25
-H2O2/H2O,H₂O₂ + 2H⁺ + 2e⁻ → 2H₂O,alkaline_vent,1.7019,-328.42,96.15,171.95
 H2/H+,2H+ + 2e- → H2,acidic_ocean,-0.5693,109.87,137.52,-38.41
 CO2/CH4,CO2 + 8H+ + 8e- → CH4 + 2H2O,acidic_ocean,-0.5624,434.14,230.51,-48.73
-Fe3+/Fe2+,Fe3+ + e- → Fe2+,acidic_ocean,0.7079,-68.3,91.93,341.49
 NO3-/NO2-,NO3⁻ + 2H⁺ + 2e⁻ → NO2⁻ + H2O,acidic_ocean,0.1414,-27.28,33.58,23.32
-S0/H2S,S⁰ + 2H⁺ + 2e⁻ → H2S,acidic_ocean,-0.1707,32.94,-121.91,-99.81
-CO2/CO,CO2 + 2H⁺ + 2e⁻ → CO + H2O,acidic_ocean,-0.3545,68.42,334.48,-34.38
 SO4^2-/H2S,SO₄²⁻ + 8H⁺ + 8e⁻ → H₂S + 4H₂O,acidic_ocean,-0.5354,413.3,246.75,-51.86
 NO2^-/N2,2NO₂⁻ + 6H⁺ + 6e⁻ → N₂ + 2H₂O,acidic_ocean,-0.0225,13.0,-6.61,-1.27
-MnO2/Mn2+,MnO₂ + 4H⁺ + 2e⁻ → Mn²⁺ + 2H₂O,acidic_ocean,0.5154,-99.46,41.91,19.13
 Acetate/CO2,CH₃COO⁻ + 2H₂O → 2CO₂ + 7H⁺ + 8e⁻,acidic_ocean,-0.2745,211.86,94.64,-24.35
-Formate/CO2,HCOO⁻ → CO₂ + H⁺ + 2e⁻,acidic_ocean,-0.4611,88.97,107.23,-35.03
-H2O2/H2O,H₂O₂ + 2H⁺ + 2e⁻ → 2H₂O,acidic_ocean,1.7079,-329.57,96.49,172.55
 H2/H+,2H+ + 2e- → H2,shallow_pond,-0.6705,129.38,161.95,-45.24
 CO2/CH4,CO2 + 8H+ + 8e- → CH4 + 2H2O,shallow_pond,-0.6688,516.23,274.1,-57.94
-Fe3+/Fe2+,Fe3+ + e- → Fe2+,shallow_pond,0.7059,-68.11,91.67,340.54
 NO3-/NO2-,NO3⁻ + 2H⁺ + 2e⁻ → NO2⁻ + H2O,shallow_pond,0.0363,-7.0,8.62,5.98
-S0/H2S,S⁰ + 2H⁺ + 2e⁻ → H2S,shallow_pond,-0.2768,53.41,-197.7,-161.85
-CO2/CO,CO2 + 2H⁺ + 2e⁻ → CO + H2O,shallow_pond,-0.4587,88.51,432.7,-44.48
 SO4^2-/H2S,SO₄²⁻ + 8H⁺ + 8e⁻ → H₂S + 4H₂O,shallow_pond,-0.6418,495.39,295.76,-62.16
 NO2^-/N2,2NO₂⁻ + 6H⁺ + 6e⁻ → N₂ + 2H₂O,shallow_pond,-0.1302,75.38,-38.3,-7.39
-MnO2/Mn2+,MnO₂ + 4H⁺ + 2e⁻ → Mn²⁺ + 2H₂O,shallow_pond,0.3003,-57.94,24.41,11.14
 Acetate/CO2,CH₃COO⁻ + 2H₂O → 2CO₂ + 7H⁺ + 8e⁻,shallow_pond,-0.274,211.47,94.47,-24.31
-Formate/CO2,HCOO⁻ → CO₂ + H⁺ + 2e⁻,shallow_pond,-0.4621,89.16,107.46,-35.1
-H2O2/H2O,H₂O₂ + 2H⁺ + 2e⁻ → 2H₂O,shallow_pond,1.7059,-329.18,96.38,172.35
