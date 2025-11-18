@@ -11,7 +11,7 @@ import seaborn as sns
 base_dir = os.path.dirname(__file__)
 csv_path = os.path.join(base_dir, "results.csv")
 figures_png = os.path.join(base_dir, "../main/figures_main")
-figures_pdf = os.path.join(base_dir, "../report/figures")
+figures_pdf = os.path.join(base_dir, "../report/figures/figures_main")
 os.makedirs(figures_png, exist_ok=True)
 os.makedirs(figures_pdf, exist_ok=True)
 
@@ -62,7 +62,14 @@ def plot_exergy_efficiency():
     plt.close()
 
 def plot_redox_ladder():
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+    import matplotlib.cm as cm
+    import matplotlib.colors as mcolors
+    import os
     from data import redox_pairs
+
     ladder = []
     for pair in redox_pairs:
         name = pair.get("name")
@@ -76,22 +83,27 @@ def plot_redox_ladder():
         ladder.append({
             "Redox Pair": name,
             "E0": E0,
-            "Exergy Eff (%)": round(ex_eff, 2)
+            "Exergy Efficiency": ex_eff
         })
 
     df = pd.DataFrame(ladder).sort_values(by="E0", ascending=False)
 
+    # Normalize efficiency values for coloring
+    norm = mcolors.Normalize(vmin=df["Exergy Efficiency"].min(), vmax=df["Exergy Efficiency"].max())
+    cmap = cm.get_cmap("viridis")
+    colors = [cmap(norm(val)) for val in df["Exergy Efficiency"]]
+
+    # Plot
     plt.figure(figsize=(8, 6))
-    sns.barplot(
-        data=df,
-        x="E0",
-        y="Redox Pair",
-        hue="Redox Pair",
-        palette="coolwarm"
-    )
+    bars = plt.barh(df["Redox Pair"], df["E0"], color=colors)
     plt.xlabel("Standard Redox Potential E$^0$ (V)")
     plt.title("Redox Ladder Colored by Exergy Efficiency")
-    plt.legend([], [], frameon=False)  # Remove legend
+
+    # Colorbar
+    sm = cm.ScalarMappable(cmap=cmap, norm=norm)
+    sm.set_array([])
+    cbar = plt.colorbar(sm)
+    cbar.set_label("Exergy Efficiency (%)")
 
     plt.tight_layout()
     plt.savefig(os.path.join(figures_pdf, "redox_ladder.pdf"))

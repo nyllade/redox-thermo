@@ -20,18 +20,23 @@ def optimize_environment_for_redox(pair, temp_range=(300, 373), pH_range=(5, 9),
     best_result = None
     best_eff = -np.inf
 
+    delta_H = pair['delta_H']
+    if abs(delta_H) < 1e-8:
+        return None  # Skip this pair (e.g., H₂/H⁺) if ΔH is zero
+
     T_values = np.linspace(*temp_range, steps)
     pH_values = np.linspace(*pH_range, steps)
 
     for T in T_values:
         for pH in pH_values:
-            if "H+" in pair["conc"]:
-                pair["conc"]["H+"] = 10 ** (-pH)
+            conc = pair["conc"].copy()
+            if "H+" in conc:
+                conc["H+"] = 10 ** (-pH)
 
-            Q = calculate_Q(pair)
+            Q = calculate_Q({**pair, "conc": conc})
             E = adjust_E0(pair['E0'], pair['n'], T, Q)
             dG = calculate_deltaG(E, pair['n'])
-            ex_eff = calculate_exergy_efficiency_from_H(dG, pair['delta_H'])
+            ex_eff = calculate_exergy_efficiency_from_H(dG, delta_H)
 
             if ex_eff > best_eff:
                 best_eff = ex_eff
@@ -49,6 +54,9 @@ def run_optimization_for_all():
     all_results = []
     for pair in redox_pairs:
         result = optimize_environment_for_redox(pair)
+        if result is None:
+            print(f"⚠️ Skipping {pair['name']} — exergy undefined (ΔH = 0)")
+            continue
         all_results.append(result)
         print(f"Best conditions for: {result['Redox Pair']}")
         for k, v in result.items():
@@ -56,9 +64,12 @@ def run_optimization_for_all():
                 print(f"  {k}: {v}")
         print("-")
 
-    df = pd.DataFrame(all_results)
-    df.to_csv(csv_path, index=False)
-    print(f"\n✅ Optimization results saved to {csv_path}.")
+    if all_results:
+        df = pd.DataFrame(all_results)
+        df.to_csv(csv_path, index=False)
+        print(f"\n✅ Optimization results saved to {csv_path}.")
+    else:
+        print("❌ No valid results to save.")
 
 if __name__ == "__main__":
     run_optimization_for_all()

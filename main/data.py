@@ -7,9 +7,9 @@ redox_pairs = [
     {
         "name": "H2/H+",
         "reaction": "2H+ + 2e- → H2",
-        "E0": -0.414,
+        "E0": 0.000,  # Standard hydrogen electrode potential in V
         "n": 2,
-        "delta_H": -286,  # kJ/mol
+        "delta_H": 0.000,  # kJ/mol
         "reactants": {"H+": 2},
         "products": {"H2": 1},
         "conc": {"H+": 1e-7, "H2": 1e-6}
@@ -19,7 +19,7 @@ redox_pairs = [
         "reaction": "CO2 + 8H+ + 8e- → CH4 + 2H2O",
         "E0": -0.244,
         "n": 8,
-        "delta_H": -891,  # kJ/mol (approx. combustion of CH4)
+        "delta_H": -44.5,  # kJ/mol (approx. combustion of CH4)
         "reactants": {"CO2": 1, "H+": 8},
         "products": {"CH4": 1},
         "conc": {"CO2": 1e-3, "CH4": 1e-6, "H+": 1e-7}
@@ -29,41 +29,41 @@ redox_pairs = [
         "reaction": "NO3⁻ + 2H⁺ + 2e⁻ → NO2⁻ + H2O",
         "E0": 0.421,
         "n": 2,
-        "delta_H": -117,  # estimated
+        "delta_H": -90.53,  # estimated
         "reactants": {"NO3-": 1, "H+": 2},
         "products": {"NO2-": 1},
         "conc": {"NO3-": 1e-4, "NO2-": 1e-6, "H+": 1e-7}
     },
     {
         "name": "SO4^2-/H2S",
-        "reaction": "SO₄²⁻ + 8H⁺ + 8e⁻ → H₂S + 4H₂O",
-        "E0": -0.217,
+        "reaction": "SO₄²⁻ + 10H⁺ + 8e⁻ → H₂S + 4H₂O",
+        "E0": -0.220,
         "n": 8,
-        "delta_H": -797,  # Approximate enthalpy for sulfate reduction
-        "reactants": {"SO4^2-": 1, "H+": 8},
+        "delta_H": 105.87,  # Approximate enthalpy for sulfate reduction
+        "reactants": {"SO4^2-": 1, "H+": 10},
         "products": {"H2S": 1, "H2O": 4},
         "conc": {"SO4^2-": 1e-3, "H2S": 1e-6, "H+": 1e-7}
     },
     {
-        "name": "NO2^-/N2",
-        "reaction": "2NO₂⁻ + 6H⁺ + 6e⁻ → N₂ + 2H₂O",
-        "E0": 0.34,
-        "n": 6,
-        "delta_H": -1020,  # Estimate based on full denitrification
-        "reactants": {"NO2-": 2, "H+": 6},
-        "products": {"N2": 1, "H2O": 2},
-        "conc": {"NO2-": 1e-4, "N2": 1e-6, "H+": 1e-7}
+        "name": "Fe3+/Fe2+",
+        "reaction": "Fe³⁺ + e⁻ → Fe²⁺",
+        "E0": 0.770,  # Standard redox potential in V vs SHE
+        "n": 1,
+        "delta_H": -40.2,  # Approximate ΔH in kJ/mol, literature varies from -18 to -20
+        "reactants": {"Fe3+": 1},
+        "products": {"Fe2+": 1},
+        "conc": {"Fe3+": 1e-6, "Fe2+": 1e-6}
     },
     {
-        "name": "Acetate/CO2",
-        "reaction": "CH₃COO⁻ + 2H₂O → 2CO₂ + 7H⁺ + 8e⁻",
+        "name": "CO2/CH3COO-",
+        "reaction": "2CO₂ + 8H⁺ + 8e⁻ → CH₃COO⁻ + 2H₂O",
         "E0": -0.290,
         "n": 8,
-        "delta_H": -870,  # Rough enthalpy for acetate oxidation
-        "reactants": {"Acetate": 1},
-        "products": {"CO2": 2},
-        "conc": {"Acetate": 1e-4, "CO2": 1e-3}
-    },
+        "delta_H": -45.27,  # Approximate enthalpy for CO₂ reduction to acetate
+        "reactants": {"CO2": 2, "H+": 8},
+        "products": {"CH3COO-": 1, "H2O": 2},
+        "conc": {"CO2": 1e-3, "CH3COO-": 1e-4, "H+": 1e-7}
+   } 
 ]
 
 

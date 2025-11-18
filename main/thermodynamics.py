@@ -1,7 +1,3 @@
-# This script generates plots for the optimal conditions of redox pairs based on the results from the optimization process.
-# It includes functions to plot optimal exergy efficiency, scatter plots of optimal conditions, and bar plots of ΔG at optimal conditions.
-# It also ensures that the figures directory exists before saving the plots.
-
 import math
 
 # Constants
@@ -10,9 +6,6 @@ R = 8.3145      # Universal gas constant (J/mol·K)
 
 
 def calculate_Q(pair):
-    """
-    Calculates the reaction quotient Q using given concentrations and stoichiometry.
-    """
     Q = 1.0
     for species, coeff in pair["products"].items():
         conc = pair["conc"].get(species, 1)
@@ -24,23 +17,14 @@ def calculate_Q(pair):
 
 
 def adjust_E0(E0, n, T, Q):
-    """
-    Adjusts the standard potential E0 using the Nernst equation.
-    """
     return E0 - (R * T) / (n * F) * math.log(Q)
 
 
 def calculate_deltaG(E, n):
-    """
-    Calculates the Gibbs free energy change ΔG.
-    """
     return -n * F * E
 
 
 def calculate_exergy_efficiency_from_G(deltaG, max_deltaG):
-    """
-    Estimates the exergy efficiency using ΔG and ΔG⁰.
-    """
     if max_deltaG == 0:
         return 0.0
     return (deltaG / max_deltaG) * 100
@@ -48,14 +32,26 @@ def calculate_exergy_efficiency_from_G(deltaG, max_deltaG):
 
 def calculate_exergy_efficiency_from_H(deltaG, deltaH_kJ):
     """
-    Estimates the exergy efficiency using ΔG and ΔH.
+    Calculates exergy efficiency from ΔG and ΔH.
+
+    Returns a value capped between 0% and 100% to prevent unphysical results.
+    If ΔH is zero or signs are incompatible, returns np.nan.
     """
-    if deltaH_kJ == 0:
-        return 0.0
+    if abs(deltaH_kJ) < 1e-8:
+        return float('nan')  # undefined for ΔH = 0
+
     deltaH_J = deltaH_kJ * 1000
-    return (deltaG / deltaH_J) * 100
+
+    # Only allow physically meaningful results (ΔG must be positive, ΔH must be positive)
+    raw_eff = deltaG / deltaH_J
+
+    if raw_eff < 0:
+        return 0.0  # treat negative efficiency as 0%
+    elif raw_eff > 1:
+        return 100.0  # cap at 100%
+    else:
+        return raw_eff * 100
 
 
-# Optional self-test
 if __name__ == "__main__":
     print("Thermodynamics module with ΔH-based exergy modeling loaded.")
