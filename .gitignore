@@ -1,4 +1,51 @@
+# --- Python ---
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
+*.pyd
+*.ipynb_checkpoints
+
+# Virtual environment
+env/
+venv/
+ENV/
+.redox-thermo-env/
+.insulin-env/
+.redox-thermo-env*
+insulin-env*
+
+# --- VSCode ---
+.vscode/
+
+# --- MacOS metadata ---
 .DS_Store
-.venv/
+
+# --- Output data ---
+*.csv
+*.txt
+*.dat
+*.npz
+*.npy
+
+# --- Figures, animations, generated tables ---
+/figures/
+/report/figures/
+/report/tables/
+*.png
+*.svg
+*.jpg
+*.mp4
+
+# --- Build / Logs ---
+build/
+dist/
+*.log
+
+# --- Jupyter Notebook Autosave ---
+*.ipynb_checkpoints/
+
+# --- Temporary files ---
+*.tmp
+*.bak
+*.swp
+*.swx

@@ -1,7 +1,0 @@
-Redox Pair,ΔG Range (pH),ΔG Range (T),Exergy Range (pH),Exergy Range (T),Stability
-CO2/CH3COO-,275.69,133.25,0.0,0.0,Sensitive
-CO2/CH4,275.69,121.76,0.0,0.0,Sensitive
-Fe3+/Fe2+,0.0,0.0,0.0,0.0,Stable
-H2/H+,68.92,18.38,,,Sensitive
-NO3-/NO2-,68.92,27.57,51.67,18.68,Sensitive
-SO42-/H2S,344.61,153.92,0.0,0.0,Sensitive
